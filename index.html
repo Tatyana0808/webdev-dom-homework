@@ -302,6 +302,23 @@ commentsArray.push({
     
 
   });
+
+  const commentClick = () => {
+    const userComments = document.querySelectorAll(".comment");
+    for (const userComment of userComments){
+      const addText = () => {
+      const commentBodyText = userComment.querySelector(".comment-body").innerText;
+      const commentNameText = userComment.querySelector(".comment-name").innerText;
+      commentElement.value = `>${commentBodyText} ${commentNameText},`;
+      commentElement.focus();
+      renderComments();
+    };
+    userComment.addEventListener("click", addText);
+  }
+};
+  
+      
+  
    
   </script>
 </html>
