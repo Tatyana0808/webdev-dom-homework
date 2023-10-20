@@ -129,7 +129,7 @@
       return `${day}.${month}.${year} ${hour}:${minute}`
     }
 
-        buttonElement.addEventListener('click', () => {
+   /*     buttonElement.addEventListener('click', () => {
         nameInputElement.classList.remove('err');
         textareaInputElement.classList.remove('err');
       if (nameInputElement.value === '') {
@@ -177,7 +177,7 @@
     }
   }
 
-    );
+    );*/
     document.addEventListener("keyup", submitEnter);
 
 				buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
@@ -291,7 +291,7 @@ buttonElement.addEventListener('click', () => {
     }
 commentsArray.push({  
       name: nameInputElement.value,
-      date: DateNow,
+      date: getDateNow(),
       comment: textareaInputElement.value,
       like: 0,
       userLike: false,
