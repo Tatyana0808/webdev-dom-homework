@@ -9,40 +9,7 @@
   <body>
     <div class="container">
       <ul class="comments" id="list-comments">
-        <li class="comment">
-          <div class="comment-header">
-            <div>Глеб Фокин</div>
-            <div>12.02.22 12:18</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Это будет первый комментарий на этой странице
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">3</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>
-        <li class="comment">
-          <div class="comment-header">
-            <div>Варвара Н.</div>
-            <div>13.02.22 19:22</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Мне нравится как оформлена эта страница! ❤
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">75</span>
-              <button class="like-button -active-like"></button>
-            </div>
-          </div>
-        </li>
+        <!-- Список рендерится из Js -->
       </ul>
       <div class="add-form">
         <input id="name-input"
@@ -59,6 +26,7 @@
         <div class="add-form-row">
           <button class="add-form-button" id="add-button">Написать</button>
           <button class="add-form-button" id="delete-button">Удалить коментарий</button>
+          
         </div>
       </div>
     </div>
@@ -67,7 +35,10 @@
   <script>
     "use strict";
     console.log("It works!");
+    
     // Код писать здесь
+    
+    const ulElement = document.getElementById("list-comments");
 
 		const setActiveButtonInput = () => {
       
@@ -158,7 +129,7 @@
       return `${day}.${month}.${year} ${hour}:${minute}`
     }
 
-        buttonElement.addEventListener('click', () => {
+   /*     buttonElement.addEventListener('click', () => {
         nameInputElement.classList.remove('err');
         textareaInputElement.classList.remove('err');
       if (nameInputElement.value === '') {
@@ -200,17 +171,143 @@
             </div>
           </div>
         </li>`;
+            nameInputElement.value = "";
+            textareaInputElement.value = "";
 
     }
   }
 
-    );
+    );*/
     document.addEventListener("keyup", submitEnter);
 
 				buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
 					document.getElementById('list-comments').lastElementChild.remove();
 				});
 
+
+
+        
+  const commentsArray = [
+  {
+    name: 'Глеб Фокин',
+    date: '12.02.22 12:18',
+    comment: 'Это будет первый комментарий на этой странице',
+    like: 3,
+    userLike: false,
+    paint: ''
+  },
+  {
+    name: 'Варвара Н.',
+    date: '13.02.22 19:22',
+    comment: 'Мне нравится как оформлена эта страница! ❤',
+    like: 75,
+    userLike: true,
+    paint: '-active-like'
+  }
+];
+
+const likes = () => {
+  const likeButtons = document.querySelectorAll('.like-button');
+  for (const likeButton of likeButtons) {
+    likeButton.addEventListener('click', () => {
+      const index = likeButton.dataset.index;
+      if (commentsArray[index].userLike === false ) {
+        commentsArray[index].paint = '-active-like';
+        commentsArray[index].like += 1;
+        commentsArray[index].userLike = true;
+      } else {
+        commentsArray[index].paint = '';
+        commentsArray[index].like -= 1;
+        commentsArray[index].userLike = false;
+      }
+      renderComments();
+    });
+  };
+};
+
+
+const renderComments = () => {
+  const commentsHtml = commentsArray.map((item, index) =>{
+    return `
+    <li class="comment">
+          <div class="comment-header">
+            <div>${item.name}</div>
+            <div>${item.date}</div>
+          </div>
+          <div class="comment-body">
+            <div class="comment-text">
+              ${item.comment}
+            </div>
+          </div>
+          <div class="comment-footer">
+            <div class="likes">
+              <span class="likes-counter">${item.like}</span>
+              <button data-index='${index}' class="like-button ${item.paint}"</button>
+            </div>
+          </div>
+        </li>
+    `})
+    .join('');
+    listElement.innerHTML = commentsHtml;
+    likes();
+};
+
+renderComments();
+
+
+buttonElement.disabled = true;
+nameInputElement.addEventListener('input', () =>{
+  if ((nameInputElement.value === '')||(textareaInputElement.value==='')){
+    buttonElement.disabled = true;
+   return;
+  }
+   else{
+    buttonElement.disabled = false;
+    return;
+  }
+});
+
+textareaInputElement.addEventListener('input', () =>{
+  if ((textareaInputElement.value==='')||(nameInputElement.value==='')){
+    buttonElement.disabled = true;
+   return;
+  }
+   else{
+    buttonElement.disabled = false;
+
+    return;
+  }
+})
+
+
+buttonElement.addEventListener('click', () => {
+  nameInputElement.classList.remove('error');
+  textareaInputElement.classList.remove('error');
+
+    if ((nameInputElement.value ||textareaInputElement.value) === '') {
+      nameInputElement.classList.add('error');
+      textareaInputElement.classList.add('error');
+      return;
+    }
+commentsArray.push({  
+      name: nameInputElement.value,
+      date: getDateNow(),
+      comment: textareaInputElement.value,
+      like: 0,
+      userLike: false,
+      paint: '',
+  });
+    renderComments();
+
+
+
+
+    nameInputElement.value = '';
+    textareaInputElement.value = '';
+    buttonElement.disabled = true;
+    
+
+  });
    
   </script>
 </html>
