@@ -314,13 +314,15 @@ commentsArray.push({
     const userComments = document.querySelectorAll(".comment");
     for (const userComment of userComments) {
       userComment.addEventListener("click",() => {
-        commentElement.value = `>${userComment.dataset.text}\n$ ${userComment.dataset.username},\n`;
+        textareaInputElement.value = `>${userComment.dataset.text}\n ${userComment.dataset.username},\n`;
       });
     }
     
   }
 
-
+  renderComments();
+  commentClick();
+  //console.log(commentClick)
   
       
   
