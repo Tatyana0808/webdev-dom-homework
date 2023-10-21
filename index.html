@@ -223,7 +223,8 @@ const likes = () => {
 const renderComments = () => {
   const commentsHtml = commentsArray.map((item, index) =>{
     return `
-    <li class="comment">
+    
+    <li class="comment" data-username="${item.name}" data-text="${item.comment}">
           <div class="comment-header">
             <div>${item.name}</div>
             <div>${item.date}</div>
@@ -285,8 +286,14 @@ buttonElement.addEventListener('click', () => {
     }
 commentsArray.push({  
       name: nameInputElement.value,
+      name: nameInputElement.value
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;"),
       date: getDateNow(),
       comment: textareaInputElement.value,
+      comment: textareaInputElement.value
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;"),
       like: 0,
       userLike: false,
       paint: '',
@@ -305,17 +312,15 @@ commentsArray.push({
 
   const commentClick = () => {
     const userComments = document.querySelectorAll(".comment");
-    for (const userComment of userComments){
-      const addText = () => {
-      const commentBodyText = userComment.querySelector(".comment-body").innerText;
-      const commentNameText = userComment.querySelector(".comment-name").innerText;
-      commentElement.value = `>${commentBodyText} ${commentNameText},`;
-      commentElement.focus();
-      renderComments();
-    };
-    userComment.addEventListener("click", addText);
+    for (const userComment of userComments) {
+      userComment.addEventListener("click",() => {
+        commentElement.value = `>${userComment.dataset.text}\n$ ${userComment.dataset.username},\n`;
+      });
+    }
+    
   }
-};
+
+
   
       
   
