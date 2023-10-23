@@ -89,12 +89,6 @@
             textareaInputElement.value = "";
         }
 		}
-
-    
-		
-		
-
-
     const buttonElement = document.getElementById('add-button');
     const buttonElementDel = document.getElementById("delete-button");
     const listElement = document.getElementById('list-comments');
@@ -209,7 +203,8 @@
 const likes = () => {
   const likeButtons = document.querySelectorAll('.like-button');
   for (const likeButton of likeButtons) {
-    likeButton.addEventListener('click', () => {
+    likeButton.addEventListener('click', (event) => {
+       event.stopPropagation();
       const index = likeButton.dataset.index;
       if (commentsArray[index].userLike === false ) {
         commentsArray[index].paint = '-active-like';
@@ -225,11 +220,22 @@ const likes = () => {
   };
 };
 
+const commentClick = () => {
+    const userComments = document.querySelectorAll(".comment");
+    for (const userComment of userComments) {
+      userComment.addEventListener("click",() => {
+        textareaInputElement.value = `>${userComment.dataset.text}\n ${userComment.dataset.username},\n`;
+      });
+    }
+    
+  }
+
 
 const renderComments = () => {
   const commentsHtml = commentsArray.map((item, index) =>{
     return `
-    <li class="comment">
+    
+    <li class="comment" data-username="${item.name}" data-text="${item.comment}">
           <div class="comment-header">
             <div>${item.name}</div>
             <div>${item.date}</div>
@@ -250,6 +256,7 @@ const renderComments = () => {
     .join('');
     listElement.innerHTML = commentsHtml;
     likes();
+    commentClick();
 };
 
 renderComments();
@@ -291,8 +298,14 @@ buttonElement.addEventListener('click', () => {
     }
 commentsArray.push({  
       name: nameInputElement.value,
+      name: nameInputElement.value
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;"),
       date: getDateNow(),
       comment: textareaInputElement.value,
+      comment: textareaInputElement.value
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;"),
       like: 0,
       userLike: false,
       paint: '',
@@ -308,6 +321,15 @@ commentsArray.push({
     
 
   });
+
+  
+
+  renderComments();
+  
+  //console.log(commentClick)
+  
+      
+  
    
   </script>
 </html>
