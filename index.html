@@ -220,6 +220,16 @@ const likes = () => {
   };
 };
 
+const commentClick = () => {
+    const userComments = document.querySelectorAll(".comment");
+    for (const userComment of userComments) {
+      userComment.addEventListener("click",() => {
+        textareaInputElement.value = `>${userComment.dataset.text}\n ${userComment.dataset.username},\n`;
+      });
+    }
+    
+  }
+
 
 const renderComments = () => {
   const commentsHtml = commentsArray.map((item, index) =>{
@@ -246,6 +256,7 @@ const renderComments = () => {
     .join('');
     listElement.innerHTML = commentsHtml;
     likes();
+    commentClick();
 };
 
 renderComments();
@@ -311,18 +322,10 @@ commentsArray.push({
 
   });
 
-  const commentClick = () => {
-    const userComments = document.querySelectorAll(".comment");
-    for (const userComment of userComments) {
-      userComment.addEventListener("click",() => {
-        textareaInputElement.value = `>${userComment.dataset.text}\n ${userComment.dataset.username},\n`;
-      });
-    }
-    
-  }
+  
 
   renderComments();
-  commentClick();
+  
   //console.log(commentClick)
   
       
