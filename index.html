@@ -328,7 +328,39 @@ commentsArray.push({
   
   //console.log(commentClick)
   
-      
+       //Отправляю комментарий
+      fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+				method: "POST",
+				body: JSON.stringify({
+					name: nameInputElement.value
+					.replaceAll("<", "&lt;")
+      		.replaceAll(">", "&gt;"),
+
+					text: textareaInputElement.value
+					.replaceAll("<", "&lt;")
+      		.replaceAll(">", "&gt;"),
+				}),
+			}).then((response) => {
+				response.json().then((responseData) => {
+					fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+      method: "GET",
+    }).then((response) => {
+      response.json().then((responseData) => {
+        const getApiComments = responseData.comments.map((comment) => {
+          return {
+            author: comment.author.name,
+            date: getDateNow(),
+            likes: comment.likes,
+            isLiked: false,
+            text: comment.text,
+          };
+        });
+        commentsArray = getApiComments;
+				renderComments();
+				});
+			});
+		});
+  });
    
   </script>
 </html>
