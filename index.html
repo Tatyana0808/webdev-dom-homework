@@ -106,11 +106,11 @@
       response.json().then((responseData) => {
         const getApiComments = responseData.comments.map((comment) => {
           return {
-            author: comment.author.name,
+            name: comment.author.name,
             date: getDateNow(),
             likes: comment.likes,
             isLiked: false,
-            text: comment.text,
+            comment: comment.text,
           };
         });
         commentsArray = getApiComments;
@@ -274,11 +274,11 @@ buttonElement.addEventListener('click', () => {
       response.json().then((responseData) => {
         const getApiComments = responseData.comments.map((comment) => {
           return {
-            author: comment.author.name,
+            name: comment.author.name,
             date: getDateNow(),
             likes: comment.likes,
             isLiked: false,
-            text: comment.text,
+            comment: comment.text,
           };
         });
         commentsArray = getApiComments;
