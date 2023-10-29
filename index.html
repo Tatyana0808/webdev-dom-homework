@@ -98,7 +98,7 @@
     setActiveButtonInput();//Делаем кнопку активной после ввода поля
    
 		setActiveButtonMessage();//Делаем кнопку активной после ввода поля
-    let commentsArray1 = [];
+    let commentsArray = [];
 
     fetch("https://wedev-api.sky.pro/api/v1/dmitriev-denis/comments", {
       method: "GET",
@@ -113,7 +113,7 @@
             text: comment.text,
           };
         });
-        commentsArray1 = getApiComments;
+        commentsArray = getApiComments;
 				renderComments();
 			});
 		});
@@ -152,24 +152,7 @@
 
 
         
-  const commentsArray = [
-  {
-    name: 'Глеб Фокин',
-    date: '12.02.22 12:18',
-    comment: 'Это будет первый комментарий на этой странице',
-    like: 3,
-    userLike: false,
-    paint: ''
-  },
-  {
-    name: 'Варвара Н.',
-    date: '13.02.22 19:22',
-    comment: 'Мне нравится как оформлена эта страница! ❤',
-    like: 75,
-    userLike: true,
-    paint: '-active-like'
-  }
-];
+ // let commentsArray = [];
 
 const likes = () => {
   const likeButtons = document.querySelectorAll('.like-button');
@@ -206,7 +189,7 @@ const commentClick = () => {
 
 
 const renderComments = () => {
-  const commentsHtml = commentsArray.map((item, index) =>{
+  let commentsHtml = commentsArray.map((item, index) =>{
     return `
     
     <li class="comment" data-username="${item.name}" data-text="${item.comment}">
@@ -270,6 +253,46 @@ buttonElement.addEventListener('click', () => {
       textareaInputElement.classList.add('error');
       return;
     }
+    getDateNow();
+
+    fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+				method: "POST",
+				body: JSON.stringify({
+					name: nameInputElement.value
+					.replaceAll("<", "&lt;")
+      		.replaceAll(">", "&gt;"),
+
+					text: textareaInputElement.value
+					.replaceAll("<", "&lt;")
+      		.replaceAll(">", "&gt;"),
+        	}),
+			}).then((response) => {
+				response.json().then((responseData) => {
+					fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+      method: "GET",
+    }).then((response) => {
+      response.json().then((responseData) => {
+        const getApiComments = responseData.comments.map((comment) => {
+          return {
+            author: comment.author.name,
+            date: getDateNow(),
+            likes: comment.likes,
+            isLiked: false,
+            text: comment.text,
+          };
+        });
+        commentsArray = getApiComments;
+				renderComments();
+				});
+			});
+      nameInputElement.value = '';
+      textareaInputElement.value = '';
+      buttonElement.disabled = true;
+		});
+  });
+
+
+
 commentsArray.push({  
       name: nameInputElement.value,
       name: nameInputElement.value
@@ -288,7 +311,6 @@ commentsArray.push({
 
 
 
-
     nameInputElement.value = '';
     textareaInputElement.value = '';
     buttonElement.disabled = true;
@@ -298,46 +320,10 @@ commentsArray.push({
 
   
 
-  renderComments();
   
   //console.log(commentClick)
   
        
-      fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
-				method: "POST",
-				body: JSON.stringify({
-					name: nameInputElement.value
-					.replaceAll("<", "&lt;")
-      		.replaceAll(">", "&gt;"),
-
-					text: textareaInputElement.value
-					.replaceAll("<", "&lt;")
-      		.replaceAll(">", "&gt;"),
-				}),
-			}).then((response) => {
-				response.json().then((responseData) => {
-					fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
-      method: "GET",
-    }).then((response) => {
-      response.json().then((responseData) => {
-        const getApiComments = responseData.comments.map((comment) => {
-          return {
-            author: comment.author.name,
-            date: getDateNow(),
-            likes: comment.likes,
-            isLiked: false,
-            text: comment.text,
-          };
-        });
-        commentsArray1 = getApiComments;
-				renderComments();
-				});
-			});
-      nameInputElement.value = '';
-      textareaInputElement.value = '';
-      buttonElement.disabled = true;
-		});
-  });
    
   </script>
 </html>
