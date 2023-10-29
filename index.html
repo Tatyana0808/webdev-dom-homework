@@ -108,8 +108,8 @@
           return {
             name: comment.author.name,
             date: getDateNow(),
-            likes: comment.likes,
-            isLiked: false,
+            like: comment.likes,
+            userLike: false,
             comment: comment.text,
           };
         });
@@ -276,8 +276,8 @@ buttonElement.addEventListener('click', () => {
           return {
             name: comment.author.name,
             date: getDateNow(),
-            likes: comment.likes,
-            isLiked: false,
+            like: comment.likes,
+            userLike: false,
             comment: comment.text,
           };
         });
