@@ -100,7 +100,8 @@
 		setActiveButtonMessage();//Делаем кнопку активной после ввода поля
     let commentsArray = [];
 
-    fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+    const fetchComments = () => {
+      return fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
       method: "GET",
     }).then((response) => {
       response.json().then((responseData) => {
@@ -117,6 +118,8 @@
 				renderComments();
 			});
 		});
+    };
+    fetchComments();
 
     
 
@@ -268,23 +271,7 @@ buttonElement.addEventListener('click', () => {
         	}),
 			}).then((response) => {
 				response.json().then((responseData) => {
-					fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
-      method: "GET",
-    }).then((response) => {
-      response.json().then((responseData) => {
-        const getApiComments = responseData.comments.map((comment) => {
-          return {
-            name: comment.author.name,
-            date: getDateNow(),
-            like: comment.likes,
-            userLike: false,
-            comment: comment.text,
-          };
-        });
-        commentsArray = getApiComments;
-				renderComments();
-				});
-			});
+          fetchComments();
       nameInputElement.value = '';
       textareaInputElement.value = '';
       buttonElement.disabled = true;
@@ -293,21 +280,6 @@ buttonElement.addEventListener('click', () => {
 
 
 
-commentsArray.push({  
-      name: nameInputElement.value,
-      name: nameInputElement.value
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;"),
-      date: getDateNow(),
-      comment: textareaInputElement.value,
-      comment: textareaInputElement.value
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;"),
-      like: 0,
-      userLike: false,
-      paint: '',
-  });
-    renderComments();
 
 
 
