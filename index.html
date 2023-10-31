@@ -98,6 +98,28 @@
     setActiveButtonInput();//Делаем кнопку активной после ввода поля
    
 		setActiveButtonMessage();//Делаем кнопку активной после ввода поля
+    let commentsArray = [];
+
+    const fetchComments = () => {
+      return fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+      method: "GET",
+    }).then((response) => {
+      response.json().then((responseData) => {
+        const getApiComments = responseData.comments.map((comment) => {
+          return {
+            name: comment.author.name,
+            date: getDateNow(),
+            like: comment.likes,
+            userLike: false,
+            comment: comment.text,
+          };
+        });
+        commentsArray = getApiComments;
+				renderComments();
+			});
+		});
+    };
+    fetchComments();
 
     
 
@@ -123,55 +145,7 @@
       return `${day}.${month}.${year} ${hour}:${minute}`
     }
 
-   /*     buttonElement.addEventListener('click', () => {
-        nameInputElement.classList.remove('err');
-        textareaInputElement.classList.remove('err');
-      if (nameInputElement.value === '') {
-         nameInputElement.classList.add('err');
-        disabledButton();
-        return;
-        
-			} else if (textareaInputElement.value === '') 
-
-       {
-        
-        textareaInputElement.classList.add('err');
-				disabledButton();
-       return;
-        } else {
-      
-    
-    
-      
-       
-        
-     
-      
-    
-    listElement.innerHTML = listElement.innerHTML + `<li class="comment">
-          <div class="comment-header">
-            <div>${nameInputElement.value}</div>
-            <div>${getDateNow()}</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              ${textareaInputElement.value}
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">0</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>`;
-            nameInputElement.value = "";
-            textareaInputElement.value = "";
-
-    }
-  }
-
-    );*/
+  
     document.addEventListener("keyup", submitEnter);
 
 				buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
@@ -181,24 +155,7 @@
 
 
         
-  const commentsArray = [
-  {
-    name: 'Глеб Фокин',
-    date: '12.02.22 12:18',
-    comment: 'Это будет первый комментарий на этой странице',
-    like: 3,
-    userLike: false,
-    paint: ''
-  },
-  {
-    name: 'Варвара Н.',
-    date: '13.02.22 19:22',
-    comment: 'Мне нравится как оформлена эта страница! ❤',
-    like: 75,
-    userLike: true,
-    paint: '-active-like'
-  }
-];
+ // let commentsArray = [];
 
 const likes = () => {
   const likeButtons = document.querySelectorAll('.like-button');
@@ -220,6 +177,9 @@ const likes = () => {
   };
 };
 
+
+
+
 const commentClick = () => {
     const userComments = document.querySelectorAll(".comment");
     for (const userComment of userComments) {
@@ -232,7 +192,7 @@ const commentClick = () => {
 
 
 const renderComments = () => {
-  const commentsHtml = commentsArray.map((item, index) =>{
+  let commentsHtml = commentsArray.map((item, index) =>{
     return `
     
     <li class="comment" data-username="${item.name}" data-text="${item.comment}">
@@ -291,26 +251,34 @@ buttonElement.addEventListener('click', () => {
   nameInputElement.classList.remove('error');
   textareaInputElement.classList.remove('error');
 
-    if ((nameInputElement.value ||textareaInputElement.value) === '') {
+    if ((nameInputElement.value || textareaInputElement.value) === '') {
       nameInputElement.classList.add('error');
       textareaInputElement.classList.add('error');
       return;
     }
-commentsArray.push({  
-      name: nameInputElement.value,
-      name: nameInputElement.value
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;"),
-      date: getDateNow(),
-      comment: textareaInputElement.value,
-      comment: textareaInputElement.value
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;"),
-      like: 0,
-      userLike: false,
-      paint: '',
+    getDateNow();
+
+    fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+				method: "POST",
+				body: JSON.stringify({
+					name: nameInputElement.value
+					.replaceAll("<", "&lt;")
+      		.replaceAll(">", "&gt;"),
+
+					text: textareaInputElement.value
+					.replaceAll("<", "&lt;")
+      		.replaceAll(">", "&gt;"),
+        	}),
+			}).then((response) => {
+				response.json().then((responseData) => {
+          fetchComments();
+      nameInputElement.value = '';
+      textareaInputElement.value = '';
+      buttonElement.disabled = true;
+		});
   });
-    renderComments();
+
+
 
 
 
@@ -324,12 +292,10 @@ commentsArray.push({
 
   
 
-  renderComments();
   
   //console.log(commentClick)
   
-      
-  
+       
    
   </script>
 </html>
