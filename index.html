@@ -100,7 +100,7 @@
 		setActiveButtonMessage();//Делаем кнопку активной после ввода поля
     let commentsArray = [];
 
-    const fetchComments = () => {
+    /*const fetchComments = () => {
       return fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
       method: "GET",
     }).then((response) => {
@@ -118,6 +118,30 @@
 				renderComments();
 			});
 		});
+    };
+    fetchComments();*/
+
+//цепочка промисов
+const fetchComments = () => {
+      return fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+      method: "GET",
+    }).then((response) => {
+     return  response.json();
+
+    }).then((responseData) => {
+      const getApiComments = responseData.comments.map((comment) => {
+          return {
+            name: comment.author.name,
+            date: getDateNow(),
+            like: comment.likes,
+            userLike: false,
+            comment: comment.text,
+          };
+          commentsArray = getApiComments;
+				renderComments();
+			});
+    });
+
     };
     fetchComments();
 
