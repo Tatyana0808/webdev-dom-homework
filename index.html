@@ -100,7 +100,7 @@
 		setActiveButtonMessage();//Делаем кнопку активной после ввода поля
     let commentsArray = [];
 
-    /*const fetchComments = () => {
+    const fetchComments = () => {
       return fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
       method: "GET",
     }).then((response) => {
@@ -119,10 +119,10 @@
 			});
 		});
     };
-    fetchComments();*/
+    fetchComments();
 
 //цепочка промисов
-const fetchComments = () => {
+/*const fetchComments = () => {
       return fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
       method: "GET",
     }).then((response) => {
@@ -143,8 +143,7 @@ const fetchComments = () => {
     });
 
     };
-    fetchComments();
-
+    fetchComments();*/
     
 
     const getDateNow = () => {
@@ -282,7 +281,7 @@ buttonElement.addEventListener('click', () => {
     }
     getDateNow();
 
-    fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+    /*fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
 				method: "POST",
 				body: JSON.stringify({
 					name: nameInputElement.value
@@ -295,7 +294,28 @@ buttonElement.addEventListener('click', () => {
         	}),
 			}).then((response) => {
 				response.json().then((responseData) => {
+          fetchComments();*/
+
+
+          fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+				method: "POST",
+				body: JSON.stringify({
+					name: nameInputElement.value
+					.replaceAll("<", "&lt;")
+      		.replaceAll(">", "&gt;"),
+
+					text: textareaInputElement.value
+					.replaceAll("<", "&lt;")
+      		.replaceAll(">", "&gt;"),
+        	}),
+        })
+			.then((response) => {
+        return response.json();
+      })
+			.then((responseData) => {
           fetchComments();
+
+
       nameInputElement.value = '';
       textareaInputElement.value = '';
       buttonElement.disabled = true;
@@ -307,12 +327,9 @@ buttonElement.addEventListener('click', () => {
 
 
 
-    nameInputElement.value = '';
-    textareaInputElement.value = '';
-    buttonElement.disabled = true;
     
 
-  });
+  
 
   
 
