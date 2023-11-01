@@ -7,7 +7,10 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="loader" id="loader">
+      <p>Комментарий загружается<p>
+    </div>
+    <div class="container" id="container">
       <ul class="comments" id="list-comments">
         <!-- Список рендерится из Js -->
       </ul>
@@ -289,11 +292,35 @@ buttonElement.addEventListener('click', () => {
 
 
     //  Делаем лоадер
-    buttonElement.disabled = true;
-    let uploadingСomments = document.getElementById("addForm");
-    uploadingСomments.innerHTML = "Комментарий добавляется..."
+    //buttonElement.disabled = true;
+    //let uploadingСomments = document.getElementById("addForm");
+    //uploadingСomments.innerHTML = "Комментарий добавляется..."
 
 
+   // preLoaderText.textContent = "Загрузка комментариев ...";
+   //function demoDisplay() {
+    //document.getElementById("container").style.display = "none";
+   //}
+
+    //function demoVisibility() {
+   // document.getElementById("loader").style.visibility = "hidden";
+ // }
+
+// Window.addEventListener('load', () => {
+
+ //})
+
+
+
+ function myFunction() {
+ let x = document.getElementById('container');
+  if (x.style.display === 'none') {
+    x.style.display = 'block';
+  } else {
+    x.style.display = 'none';
+    document.getElementById("loader").style.visibility = "hidden"
+  }
+}
 
 
 
@@ -335,8 +362,8 @@ buttonElement.addEventListener('click', () => {
 
       nameInputElement.value = '';
       textareaInputElement.value = '';
-      buttonElement.disabled = true;
-      uploadingСomments = "";
+     // buttonElement.disabled = true;
+      //uploadingСomments = "";
 			
 		});
   });
