@@ -11,7 +11,7 @@
       <ul class="comments" id="list-comments">
         <!-- Список рендерится из Js -->
       </ul>
-      <div class="add-form">
+      <div class="add-form" id="addForm">
         <input id="name-input"
           type="text" 
           class="add-form-name"
@@ -290,6 +290,9 @@ buttonElement.addEventListener('click', () => {
 
     //  Делаем лоадер
     buttonElement.disabled = true;
+    let uploadingСomments = document.getElementById("addForm");
+    uploadingСomments = "Комментарий добавляется..."
+
 
 
 
@@ -328,10 +331,13 @@ buttonElement.addEventListener('click', () => {
 			.then((responseData) => {
           fetchComments();
           buttonElement.disabled = false;
+          
 
       nameInputElement.value = '';
       textareaInputElement.value = '';
       buttonElement.disabled = true;
+      uploadingСomments = "";
+			
 		});
   });
 
