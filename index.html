@@ -340,13 +340,15 @@
           .then((responseData) => {
 
           })
+          fetchComments()
 
 
-        fetchComments()
+        
           .then(() => {
             loaderElement.classList.remove("loaderInvisible");
             formElement.classList.remove("add-formInvisible");
           })
+          
 
       };
 
