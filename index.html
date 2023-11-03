@@ -323,6 +323,7 @@
       buttonElement.disabled = true;
       loadingElement.classList.add("loadingInvisible")
       formElement.classList.add("add-formInvisible")
+      loaderElement.classList.add("hidden");
 
       const postCommentsPromise = () => {
         fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
@@ -348,7 +349,8 @@
 
         
           .then(() => {
-            loadingElement.classList.remove("loadinInvisible");
+            
+            loadingElement.classList.remove("loadingInvisible");
             formElement.classList.remove("add-formInvisible");
           })
           
