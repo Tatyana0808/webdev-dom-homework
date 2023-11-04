@@ -109,7 +109,7 @@
 
 
 
- 
+
 
   //цепочка промисов method: "GET"
   const fetchComments = () => {
@@ -132,7 +132,7 @@
         });
         commentsArray = getApiComments;
         renderComments();
-       loaderElement.classList.add("hidden");
+        loaderElement.classList.add("hidden");
       });
   };
 
@@ -276,51 +276,51 @@
 
 
 
-   
-    buttonElement.addEventListener("click", () => {
-      buttonElement.disabled = true;
-      loadingElement.classList.add("loadingInvisible")
-      formElement.classList.add("add-formInvisible")
-      loaderElement.classList.add("hidden");
 
-      const postCommentsPromise = () => {
-        fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
-          method: "POST",
-          body: JSON.stringify({
-            name: nameInputElement.value
-              .replaceAll("<", "&lt;")
-              .replaceAll(">", "&gt;"),
+  buttonElement.addEventListener("click", () => {
+    buttonElement.disabled = true;
+    loadingElement.classList.add("loadingInvisible")
+    formElement.classList.add("add-formInvisible")
+    loaderElement.classList.add("hidden");
 
-            text: textareaInputElement.value
-              .replaceAll("___<", "&lt;")
-              .replaceAll(">", "&gt;"),
-          }),
-          })
-          .then((response) => {
-                return response.json();
-              })
-              .then((responseData) => {
-          
-                fetchComments()
+    const postCommentsPromise = () => {
+      fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+        method: "POST",
+        body: JSON.stringify({
+          name: nameInputElement.value
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;"),
 
-              })
-              
+          text: textareaInputElement.value
+            .replaceAll("___<", "&lt;")
+            .replaceAll(">", "&gt;"),
+        }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((responseData) => {
 
-              .then(() => {
-            
-                loadingElement.classList.remove("loadingInvisible");
-                formElement.classList.remove("add-formInvisible");
-              })
-          
+          fetchComments()
 
-          };
+        })
 
 
-        postCommentsPromise();
+        .then(() => {
 
-         nameInputElement.value = '';
-        textareaInputElement.value = '';
-      });
+          loadingElement.classList.remove("loadingInvisible");
+          formElement.classList.remove("add-formInvisible");
+        })
+
+
+    };
+
+
+    postCommentsPromise();
+
+    nameInputElement.value = '';
+    textareaInputElement.value = '';
+  });
 
 
 
