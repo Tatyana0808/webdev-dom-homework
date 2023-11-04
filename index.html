@@ -294,16 +294,20 @@
           text: textareaInputElement.value
             .replaceAll("___<", "&lt;")
             .replaceAll(">", "&gt;"),
-          forceError: true,
+          forceError: true
  
         }),
       })
         .then((response) => {
           return response.json();
+          сonsole.log(response.status);
+          if(response.status===500)
+           
         })
         .then((responseData) => {
 
           fetchComments()
+         //сonsole.log(responseData.status);
 
         })
 
