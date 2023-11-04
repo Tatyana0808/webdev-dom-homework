@@ -277,7 +277,7 @@
 
 
 
-  buttonElement.addEventListener("click", () => {+
+  buttonElement.addEventListener("click", () => {
     buttonElement.disabled = true;
     loadingElement.classList.add("loadingInvisible")
     formElement.classList.add("add-formInvisible")
@@ -294,6 +294,8 @@
           text: textareaInputElement.value
             .replaceAll("___<", "&lt;")
             .replaceAll(">", "&gt;"),
+          forceError: true,
+ 
         }),
       })
         .then((response) => {
