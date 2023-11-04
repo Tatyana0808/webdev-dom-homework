@@ -297,20 +297,21 @@
           }),
         })
           .then((response) => {
-            return response.json();
-          })
-          .then((responseData) => {
+                return response.json();
+               })
+              .then((responseData) => {
+                fetchComments()
 
-          })
-          fetchComments()
+               })
+              
 
 
         
-          .then(() => {
+              .then(() => {
             
-            loadingElement.classList.remove("loadingInvisible");
-            formElement.classList.remove("add-formInvisible");
-          })
+                loadingElement.classList.remove("loadingInvisible");
+                formElement.classList.remove("add-formInvisible");
+              })
           
 
       };
