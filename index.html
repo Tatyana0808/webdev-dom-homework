@@ -298,25 +298,25 @@
  
         }),
       })
-        .then((response) => {
-          return response.json();
-          сonsole.log(response.status);
-          if(response.status===500)
+      .then((response) => {
+            return response.json();
+            сonsole.log(response.status);
+            if(response.status===500)
            
-        })
-        .then((responseData) => {
+          })
+          .then((responseData) => {
 
-          fetchComments()
-         //сonsole.log(responseData.status);
+            fetchComments()
+           //сonsole.log(responseData.status);
 
-        })
+          })
 
 
-        .then(() => {
+          .then(() => {
 
-          loadingElement.classList.remove("loadingInvisible");
-          formElement.classList.remove("add-formInvisible");
-        })
+            loadingElement.classList.remove("loadingInvisible");
+            formElement.classList.remove("add-formInvisible");
+          });
 
 
     };
