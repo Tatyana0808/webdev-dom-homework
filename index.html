@@ -299,14 +299,15 @@
         }),
       })
       .then((response) => {
-            return response.json();
-            сonsole.log(response.status);
-           if(response.status===500){
+        if(response.status===500){
             throw new Error("Извините, неполатки с сервером")
            }
            if(response.status===400){
-            throw new Error("Недопустимое количество символов, меньше трех")
+            throw new Error("Недопустимое количество символов-меньше трех")
            }
+            return response.json();
+            сonsole.log(response.status);
+           
 
           })
           .then((responseData) => {
