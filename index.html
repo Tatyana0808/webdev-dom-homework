@@ -312,7 +312,7 @@
           })
           .then((responseData) => {
 
-            fetchComments()
+           return fetchComments()
            //сonsole.log(responseData.status);
            nameInputElement.value = '';
            textareaInputElement.value = '';
@@ -322,7 +322,12 @@
 
           
           .catch((error) => {
-            alert(error.message);
+            if  (error.message === 'Failed to fetch') {
+               alert("Проблемы с интернетом, проверьте подключение")
+
+            }
+
+             alert(error.message);
 
           })
           .finally(() => {
