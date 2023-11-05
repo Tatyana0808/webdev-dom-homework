@@ -301,31 +301,42 @@
       .then((response) => {
             return response.json();
             сonsole.log(response.status);
-            if(response.status===500)
-           
+           if(response.status===500){
+            throw new Error("Извините, неполатки с сервером")
+           }
+           if(response.status===400){
+            throw new Error("Недопустимое количество символов, меньше трех")
+           }
+
           })
           .then((responseData) => {
 
             fetchComments()
            //сonsole.log(responseData.status);
+           nameInputElement.value = '';
+           textareaInputElement.value = '';
 
           })
 
 
           .then(() => {
+            console.log("click");
 
             loadingElement.classList.remove("loadingInvisible");
             formElement.classList.remove("add-formInvisible");
-          });
+          })
+          .catch((error) => {
+            alert(error.message);
 
+          })
+     
 
     };
 
 
     postCommentsPromise();
 
-    nameInputElement.value = '';
-    textareaInputElement.value = '';
+    
   });
 
 
