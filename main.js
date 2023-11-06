@@ -2,6 +2,7 @@
   "use strict";
 
 import { getTodos, postTodo } from "./api.js";
+import { renderComments } from "./renderComments.js";
 
   console.log("It works!");
 
@@ -57,7 +58,7 @@ import { getTodos, postTodo } from "./api.js";
   }
   const buttonElement = document.getElementById('add-button');
   const buttonElementDel = document.getElementById("delete-button");
-  const listElement = document.getElementById('list-comments');
+  
   const nameInputElement = document.getElementById('name-input');
   const textareaInputElement = document.getElementById('textarea-input');
   const loaderElement = document.querySelector('.loader');
@@ -84,7 +85,7 @@ import { getTodos, postTodo } from "./api.js";
           };
         });
         commentsArray = getApiComments;
-        renderComments();
+        renderComments({commentsArray},{likes},{commentClick});
         loaderElement.classList.add("hidden");
       });
   };
@@ -137,7 +138,7 @@ import { getTodos, postTodo } from "./api.js";
           commentsArray[index].like -= 1;
           commentsArray[index].userLike = false;
         }
-        renderComments();
+        renderComments({commentsArray},{likes},{commentClick});
       });
     };
   };
@@ -156,35 +157,10 @@ import { getTodos, postTodo } from "./api.js";
   }
 
 
-  const renderComments = () => {
-    let commentsHtml = commentsArray.map((item, index) => {
-      return `
-    
-    <li class="comment" data-username="${item.name}" data-text="${item.comment}">
-          <div class="comment-header">
-            <div>${item.name}</div>
-            <div>${item.date}</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              ${item.comment}
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">${item.like}</span>
-              <button data-index='${index}' class="like-button ${item.paint}"</button>
-            </div>
-          </div>
-        </li>
-    `})
-      .join('');
-    listElement.innerHTML = commentsHtml;
-    likes();
-    commentClick();
-  };
+ 
 
-  renderComments();
+  renderComments({commentsArray},{likes},{commentClick});
+
 
 
   buttonElement.disabled = true;
