@@ -1,7 +1,7 @@
 
   "use strict";
 
-import { getTodos } from "./api.js";
+import { getTodos, postTodo } from "./api.js";
 
   console.log("It works!");
 
@@ -71,12 +71,7 @@ import { getTodos } from "./api.js";
 
 
 
-
-
-
-
-
-  //цепочка промисов method: "GET"
+//цепочка промисов method: "GET"
   const fetchComments = () => {
     getTodos().then((responseData) => {
         const getApiComments = responseData.comments.map((comment) => {
@@ -127,8 +122,6 @@ import { getTodos } from "./api.js";
 
 
 
-
-  
   const likes = () => {
     const likeButtons = document.querySelectorAll('.like-button');
     for (const likeButton of likeButtons) {
@@ -241,34 +234,8 @@ import { getTodos } from "./api.js";
     loaderElement.classList.add("hidden");
 
     const postCommentsPromise = () => {
-      fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
-        method: "POST",
-        body: JSON.stringify({
-          name: nameInputElement.value
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;"),
-
-          text: textareaInputElement.value
-            .replaceAll("___<", "&lt;")
-            .replaceAll(">", "&gt;"),
-          forceError: true
- 
-        }),
-      })
-      .then((response) => {
-        if(response.status===500){
-            throw new Error("Извините, неполатки с сервером")
-           }
-           if(response.status===400){
-            throw new Error("Недопустимое количество символов-меньше трех")
-           } 
-            return response.json();
-            сonsole.log(response.status);
-            
-
-
-          })
-          .then((responseData) => {
+      
+        postTodo({name:nameInputElement.value}, {text: textareaInputElement.value}).then((responseData) => {
             nameInputElement.value = '';
             textareaInputElement.value = '';
            return fetchComments()
