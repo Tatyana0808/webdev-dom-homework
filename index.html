@@ -170,8 +170,7 @@
 
 
 
-  // let commentsArray = [];
-
+  
   const likes = () => {
     const likeButtons = document.querySelectorAll('.like-button');
     for (const likeButton of likeButtons) {
@@ -277,7 +276,7 @@
 
 
 
-  buttonElement.addEventListener("click", () => {+
+  buttonElement.addEventListener("click", () => {
     buttonElement.disabled = true;
     loadingElement.classList.add("loadingInvisible")
     formElement.classList.add("add-formInvisible")
@@ -294,37 +293,62 @@
           text: textareaInputElement.value
             .replaceAll("___<", "&lt;")
             .replaceAll(">", "&gt;"),
+          forceError: true
+ 
         }),
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((responseData) => {
+      .then((response) => {
+        if(response.status===500){
+            throw new Error("Извините, неполатки с сервером")
+           }
+           if(response.status===400){
+            throw new Error("Недопустимое количество символов-меньше трех")
+           } 
+            return response.json();
+            сonsole.log(response.status);
+            
 
-          fetchComments()
 
-        })
+          })
+          .then((responseData) => {
+            nameInputElement.value = '';
+            textareaInputElement.value = '';
+           return fetchComments()
+           
+
+          })
 
 
-        .then(() => {
+          
+          .catch((error) => {
+            if  (error.message === 'Failed to fetch') {
+               alert("Проблемы с интернетом, проверьте подключение")
 
-          loadingElement.classList.remove("loadingInvisible");
-          formElement.classList.remove("add-formInvisible");
-        })
+            }
 
+             alert(error.message);
+
+          })
+          .finally(() => {
+            console.log("click");
+
+            loadingElement.classList.remove("loadingInvisible");
+            formElement.classList.remove("add-formInvisible");
+            buttonElement.disabled = false;
+          })
+     
 
     };
 
 
     postCommentsPromise();
 
-    nameInputElement.value = '';
-    textareaInputElement.value = '';
+    
   });
 
 
 
-  //console.log(commentClick)
+  
 
 
 
