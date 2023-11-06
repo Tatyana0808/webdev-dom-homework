@@ -1,5 +1,8 @@
 
   "use strict";
+
+import { getTodos } from "./api.js";
+
   console.log("It works!");
 
   // Код писать здесь
@@ -75,14 +78,7 @@
 
   //цепочка промисов method: "GET"
   const fetchComments = () => {
-    return fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
-      method: "GET",
-    })
-      .then((response) => {
-        return response.json();
-
-      })
-      .then((responseData) => {
+    getTodos().then((responseData) => {
         const getApiComments = responseData.comments.map((comment) => {
           return {
             name: comment.author.name,
