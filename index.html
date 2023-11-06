@@ -170,8 +170,7 @@
 
 
 
-  // let commentsArray = [];
-
+  
   const likes = () => {
     const likeButtons = document.querySelectorAll('.like-button');
     for (const likeButton of likeButtons) {
@@ -304,18 +303,18 @@
            }
            if(response.status===400){
             throw new Error("Недопустимое количество символов-меньше трех")
-           }
+           } 
             return response.json();
             сonsole.log(response.status);
-           
+            
+
 
           })
           .then((responseData) => {
-
+            nameInputElement.value = '';
+            textareaInputElement.value = '';
            return fetchComments()
-           //сonsole.log(responseData.status);
-           nameInputElement.value = '';
-           textareaInputElement.value = '';
+           
 
           })
 
@@ -335,6 +334,7 @@
 
             loadingElement.classList.remove("loadingInvisible");
             formElement.classList.remove("add-formInvisible");
+            buttonElement.disabled = false;
           })
      
 
@@ -348,7 +348,7 @@
 
 
 
-  //console.log(commentClick)
+  
 
 
 
