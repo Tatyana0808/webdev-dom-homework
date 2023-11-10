@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Проект "Комменты"</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>Страница входа</h1>
-    <div class="form">
-      <h3 class="form-title">Форма входа</h3>
-      <div class="form-row">
-        <input type="text" id="login-input" class="input" placeholder="Логин" />
-        <input
-          type="text"
-          id="password-input"
-          class="input"
-          placeholder="Пароль"
-        />
-      </div>
-      <br />
-      <button class="button" id="login-button">Войти</button>
-      <a href="index.html" id="link-to-tasks">Перейти на страницу задач</a>
-    </div> 
+    <div class="container">
+		<div class="add-form-login">
+			<input id="login-input" type="text" class="add-form-name-login" placeholder="Введите логин" />
+			<input id="password-input" type="password" class="add-form-name-login" placeholder="Введите пароль" />
+			<div class="add-form-row">
+				<button id="login-button" class="add-form-button-login">Войти</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 

@@ -1,11 +1,16 @@
 const host = "https://wedev-api.sky.pro/api/v2/vorobyeva-tatyana/comments";
 const userURL = " https://wedev-api.sky.pro/api/user";
-let token = "Bearer bgc0b8awbwas6g5g5k5o5s5w606g37w3cc3bo3b83k39s3co3c83c03ck";
+export let token; 
+
+export const setToken = (newToken) => {
+token = newToken;
+};
+
 export function getTodos() {
   return  fetch(host, {
       method: "GET",
       headers : {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       }
     })
       .then((response) => {
@@ -19,7 +24,7 @@ export function postTodo( {name}, {text} ) {
    return fetch(host, {
         method: "POST",
         headers : {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           name: name
