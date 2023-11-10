@@ -56,7 +56,7 @@ import { renderComments } from "./renderComments.js";
       textareaInputElement.value = "";
     }
   }
-  const buttonElement = ;
+  const buttonElement = document.getElementById("add-button");
   const buttonElementDel = document.getElementById("delete-button");
   
   const nameInputElement = document.getElementById('name-input');
