@@ -1,5 +1,6 @@
+const host = "https://wedev-api.sky.pro/api/v2/vorobyeva-tatyana/comments";
 export function getTodos() {
-  return  fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+  return  fetch(host, {
       method: "GET",
     })
       .then((response) => {
@@ -9,7 +10,7 @@ export function getTodos() {
 }
 
 export function postTodo( {name}, {text} ) {
-   return fetch("https://wedev-api.sky.pro/api/v1/vorobyeva-tatyana/comments", {
+   return fetch(host, {
         method: "POST",
         body: JSON.stringify({
           name: name
