@@ -1,5 +1,5 @@
 import { login } from ".api.js"
-import { setToken, token } from "./api"
+import { setToken, token } from ".api.js"
 
 const buttonElement = document.getElementById("login-button")
 const loginInputElement = document.getElementById("login-input")
