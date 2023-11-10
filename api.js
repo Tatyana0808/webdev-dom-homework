@@ -30,8 +30,9 @@ export function postTodo( {name}, {text} ) {
            if(response.status===400){
             throw new Error("Недопустимое количество символов-меньше трех")
            } 
-            return response.json();
             сonsole.log(response.status);
+            return response.json();
+            
             
 
 
