@@ -2,6 +2,7 @@
   "use strict";
 
 import { getTodos, postTodo } from "./api.js";
+import { renderLogin } from "./loginPage.js";
 import { renderComments } from "./renderComments.js";
 
   console.log("It works!");
@@ -242,7 +243,8 @@ import { renderComments } from "./renderComments.js";
     };
 
 
-    postCommentsPromise();
+    //postCommentsPromise();
+    renderLogin();
 
     
   });
