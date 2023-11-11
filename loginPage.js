@@ -5,7 +5,7 @@ import { login, setToken, token } from "./api.js"
 
  export const renderLogin =({fetchComments}) =>{
     const appElement = document.getElementById("app");
-    const loginHtml = `  <div class="container">
+    const loginHTML = `  <div class="container">
     <div class="add-form-login">
         <input id="login-input" type="text" class="add-form-name-login" placeholder="Введите логин" />
         <input id="password-input" type="password" class="add-form-name-login" placeholder="Введите пароль" />
@@ -16,7 +16,7 @@ import { login, setToken, token } from "./api.js"
     </div>
 </div> `;
 
-appElement.innerHtml = loginHtml;
+appElement.innerHTML = loginHTML;
 
 const buttonElement = document.getElementById("login-button")
 const loginInputElement = document.getElementById("login-input")
