@@ -86,13 +86,13 @@ import { renderComments } from "./renderComments.js";
           };
         });
         commentsArray = getApiComments;
-        renderComments({commentsArray},{likes},{commentClick});
+        renderComments({commentsArray,likes,commentClick});
         loaderElement.classList.add("hidden");
       });
   };
 
-  //fetchComments();
-  renderLogin({fetchComments});
+  fetchComments();
+  //renderLogin({fetchComments});
 
   const getDateNow = () => {
     const dateNow = new Date();
@@ -140,7 +140,7 @@ import { renderComments } from "./renderComments.js";
           commentsArray[index].like -= 1;
           commentsArray[index].userLike = false;
         }
-        renderComments({commentsArray},{likes},{commentClick});
+        renderComments({commentsArray,likes,commentClick});
       });
     };
   };
@@ -161,7 +161,7 @@ import { renderComments } from "./renderComments.js";
 
  
 
-  renderComments({commentsArray},{likes},{commentClick});
+  renderComments({commentsArray,likes,commentClick});
 
 
 

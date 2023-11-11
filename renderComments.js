@@ -1,7 +1,7 @@
 import { postTodo } from "./api.js";
 const listElement = document.getElementById('list-comments')
 
-export const renderComments = ({commentsArray},{likes},{commentClick}) => {
+export const renderComments = ({commentsArray,likes,commentClick}) => {
   const appElement = document.getElementById("app")
    /* let commentsHtml = commentsArray.map((item, index) => {
       return `
