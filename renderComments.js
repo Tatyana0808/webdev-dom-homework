@@ -3,7 +3,7 @@ const listElement = document.getElementById('list-comments')
 
 export const renderComments = ({commentsArray},{likes},{commentClick}) => {
   const appElement = document.getElementById("app")
-    let commentsHtml = commentsArray.map((item, index) => {
+   /* let commentsHtml = commentsArray.map((item, index) => {
       return `
     
     <li class="comment" data-username="${item.name}" data-text="${item.comment}">
@@ -24,9 +24,10 @@ export const renderComments = ({commentsArray},{likes},{commentClick}) => {
           </div>
         </li>
     `})
-      .join('');
-      
- const appHTML = `<li class="comment"${commentsHtml} data-username="${item.name}" data-text="${item.comment}">
+      .join('');*/
+  const appHTML = commentsArray.map((item, index) =>  {
+    
+   return `<li class="comment" data-username="${item.name}" data-text="${item.comment}">
 <div class="comment-header">
   <div>${item.name}</div>
   <div>${item.date}</div>
@@ -43,6 +44,8 @@ export const renderComments = ({commentsArray},{likes},{commentClick}) => {
   </div>
 </div>
 </li>`
+  })
+ .join('');
 
   appElement.innerHTML = appHTML;
     likes();
