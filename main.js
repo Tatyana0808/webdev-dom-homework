@@ -203,9 +203,7 @@ import { renderComments } from "./renderComments.js";
   });
 
 
-
-
-  buttonElement.addEventListener("click", () => {
+/* buttonElement.addEventListener("click", () => {
     buttonElement.disabled = true;
     loadingElement.classList.add("loadingInvisible")
     formElement.classList.add("add-formInvisible")
@@ -248,7 +246,7 @@ import { renderComments } from "./renderComments.js";
    
 
     
-  });
+  });*/
 
 
 

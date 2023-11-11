@@ -25,7 +25,7 @@ export const renderComments = ({commentsArray},{likes},{commentClick}) => {
         </li>
     `})
       .join('');
-
+      
  const appHTML = `<li class="comment"${commentsHtml} data-username="${item.name}" data-text="${item.comment}">
 <div class="comment-header">
   <div>${item.name}</div>
