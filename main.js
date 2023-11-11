@@ -91,7 +91,8 @@ import { renderComments } from "./renderComments.js";
       });
   };
 
-  fetchComments();
+  //fetchComments();
+  renderLogin();
 
   const getDateNow = () => {
     const dateNow = new Date();
@@ -243,8 +244,8 @@ import { renderComments } from "./renderComments.js";
     };
 
 
-    //postCommentsPromise();
-    renderLogin();
+    postCommentsPromise();
+   
 
     
   });
