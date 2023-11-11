@@ -1,7 +1,7 @@
 import { postTodo } from "./api.js";
 const listElement = document.getElementById('list-comments')
 
-export const renderComments = ({commentsArray},{likes},{commentClick},{fetchComments}) => {
+export const renderComments = ({commentsArray},{likes},{commentClick}) => {
   const appElement = document.getElementById("app")
     let commentsHtml = commentsArray.map((item, index) => {
       return `
@@ -26,7 +26,7 @@ export const renderComments = ({commentsArray},{likes},{commentClick},{fetchComm
     `})
       .join('');
 
-const appHtml = `<li class="comment"${commentsHtml} data-username="${item.name}" data-text="${item.comment}">
+const appHTML = `<li class="comment"${commentsHtml} data-username="${item.name}" data-text="${item.comment}">
 <div class="comment-header">
   <div>${item.name}</div>
   <div>${item.date}</div>
@@ -44,7 +44,7 @@ const appHtml = `<li class="comment"${commentsHtml} data-username="${item.name}"
 </div>
 </li>`
 
-  appElement.innerHTML = appHtml;
+  appElement.innerHTML = appHTML;
     likes();
     commentClick();
     const buttonElement = document.getElementById("add-button");
