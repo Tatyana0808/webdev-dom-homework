@@ -3,8 +3,8 @@ import { login, setToken, token } from "./api.js"
 
 
 
- export const renderLogin =() =>{
-    const appElement = document.getElementById("app")
+ export const renderLogin =({fetchComments}) =>{
+    const appElement = document.getElementById("app");
     const loginHtml = `  <div class="container">
     <div class="add-form-login">
         <input id="login-input" type="text" class="add-form-name-login" placeholder="Введите логин" />
@@ -30,7 +30,9 @@ login({
 console.log(token);
 setToken(responseData.user.token);
 console.log(token);
-    });
+    }).then(() => {
+       fetchComments(); 
+    })
 });
 
 };

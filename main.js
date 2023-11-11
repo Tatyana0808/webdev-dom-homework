@@ -1,7 +1,7 @@
 
   "use strict";
 
-import { getTodos, postTodo } from "./api.js";
+import { getTodos } from "./api.js";
 import { renderLogin } from "./loginPage.js";
 import { renderComments } from "./renderComments.js";
 
@@ -92,7 +92,7 @@ import { renderComments } from "./renderComments.js";
   };
 
   //fetchComments();
-  renderLogin();
+  renderLogin({fetchComments});
 
   const getDateNow = () => {
     const dateNow = new Date();
