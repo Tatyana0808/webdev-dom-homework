@@ -121,8 +121,8 @@ import { renderComments } from "./renderComments.js";
   document.addEventListener("keyup", submitEnter);
 
   // buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
-  //  document.getElementById('list-comments').lastElementChild.remove();
-//  });
+  // document.getElementById('list-comments').lastElementChild.remove();
+ // });
 
  
 
@@ -164,13 +164,24 @@ import { renderComments } from "./renderComments.js";
 
   renderComments({commentsArray,likes,commentClick});
 
+  const getToken = () => token
+  if(token){
 
-  if (token = true){
- } else buttonElement.disabled = true;
+    setActiveButtonInput();//Делаем кнопку активной после ввода поля
 
+    setActiveButtonMessage();//Делаем кнопку активной после ввода поля
 
+  }
 
-   buttonElement.disabled = true;
+  if (token){
+    buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
+       document.getElementById('list-comments').lastElementChild.remove();
+      });
+     } 
+
+   if (token){
+
+    buttonElement.disabled = true;
    nameInputElement.addEventListener('input', () => {
     if ((nameInputElement.value === '') || (textareaInputElement.value === '')) {
       buttonElement.disabled = true;
@@ -205,7 +216,12 @@ import { renderComments } from "./renderComments.js";
       return;
     }
     getDateNow();
-  });
+  }); 
+
+   }   
+
+
+
 
  
 /* buttonElement.addEventListener("click", () => {
