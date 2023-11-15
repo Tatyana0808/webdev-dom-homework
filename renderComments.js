@@ -1,4 +1,5 @@
-import { postTodo } from "./api.js";
+import { postTodo, token } from "./api.js";
+import { renderLogin } from "./loginPage.js";
 const listElement = document.getElementById('list-comments')
 
 export const renderComments = ({commentsArray,likes,commentClick}) => {
@@ -47,7 +48,44 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
   })
  .join('');
 
-  appElement.innerHTML = appHTML;
+  appElement.innerHTML = `
+  <ul class="comments" id="list-comments">
+  ${appHTML}
+  </ul>
+  ${!token ? `<div class="authorization">
+  Чтобы добавить комментарий,  <span id="link-to-link">авторизуйтесь</span> 
+  </div>` : ""};
+
+  ${token ? 
+  ` <div class="add-form" id="addForm">
+  <input id="name-input" type="text" class="add-form-name" placeholder="Введите ваше имя" />
+  <textarea id="textarea-input" type="textarea" class="add-form-text" placeholder="Введите ваш коментарий"
+    rows="4"></textarea>
+  <div class="add-form-row">
+    <button class="add-form-button" id="add-button">Написать</button>
+    <button class="add-form-button" id="delete-button">Удалить коментарий</button>
+
+  </div>` : ""
+  }
+
+
+  ` ;
+
+
+
+
+
+  const authorizationButton = document.getElementById("link-to-link");
+
+  authorizationButton.addEventListener("click",  renderLogin )
+
+
+
+
+
+
+
+
     likes();
     commentClick();
     const buttonElement = document.getElementById("add-button");
@@ -60,7 +98,7 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
     const formElement = document.querySelector('.add-form');
     const ulElement = document.getElementById("list-comments");
 
-    buttonElement.addEventListener("click", () => {
+  /*   buttonElement.addEventListener("click", () => {
       buttonElement.disabled = true;
       loadingElement.classList.add("loadingInvisible")
       formElement.classList.add("add-formInvisible")
@@ -104,6 +142,6 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
   
       
     });
-
+ */
 
   };

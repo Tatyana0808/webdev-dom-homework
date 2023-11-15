@@ -1,9 +1,9 @@
 import { login, setToken, token } from "./api.js"
+import {fetchComments} from "./main.js"
 
 
 
-
- export const renderLogin =({fetchComments}) =>{
+ export const renderLogin =() =>{
     const appElement = document.getElementById("app");
     const loginHTML = `  <div class="container">
     <div class="add-form-login">

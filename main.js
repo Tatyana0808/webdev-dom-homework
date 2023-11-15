@@ -66,15 +66,15 @@ import { renderComments } from "./renderComments.js";
   const loadingElement = document.querySelector('.loading');
   const formElement = document.querySelector('.add-form');
 
-  setActiveButtonInput();//Делаем кнопку активной после ввода поля
+ // setActiveButtonInput();//Делаем кнопку активной после ввода поля
 
-  setActiveButtonMessage();//Делаем кнопку активной после ввода поля
+ // setActiveButtonMessage();//Делаем кнопку активной после ввода поля
   let commentsArray = [];
 
 
 
 //цепочка промисов method: "GET"
-  const fetchComments = () => {
+ export const fetchComments = () => {
     getTodos().then((responseData) => {
         const getApiComments = responseData.comments.map((comment) => {
           return {
@@ -119,11 +119,11 @@ import { renderComments } from "./renderComments.js";
 
   document.addEventListener("keyup", submitEnter);
 
-  buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
+ /*  buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
     document.getElementById('list-comments').lastElementChild.remove();
   });
 
-
+ */
 
   const likes = () => {
     const likeButtons = document.querySelectorAll('.like-button');
@@ -165,7 +165,7 @@ import { renderComments } from "./renderComments.js";
 
 
 
-  buttonElement.disabled = true;
+ /*  buttonElement.disabled = true;
   nameInputElement.addEventListener('input', () => {
     if ((nameInputElement.value === '') || (textareaInputElement.value === '')) {
       buttonElement.disabled = true;
@@ -202,7 +202,7 @@ import { renderComments } from "./renderComments.js";
     getDateNow();
   });
 
-
+ */
 /* buttonElement.addEventListener("click", () => {
     buttonElement.disabled = true;
     loadingElement.classList.add("loadingInvisible")
