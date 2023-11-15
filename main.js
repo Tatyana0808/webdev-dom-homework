@@ -2,6 +2,7 @@
   "use strict";
 
 import { getTodos } from "./api.js";
+import { token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
 import { renderComments } from "./renderComments.js";
 
@@ -164,9 +165,13 @@ import { renderComments } from "./renderComments.js";
   renderComments({commentsArray,likes,commentClick});
 
 
+  if (token = true){
+ } else buttonElement.disabled = true;
 
- /*  buttonElement.disabled = true;
-  nameInputElement.addEventListener('input', () => {
+
+
+   buttonElement.disabled = true;
+   nameInputElement.addEventListener('input', () => {
     if ((nameInputElement.value === '') || (textareaInputElement.value === '')) {
       buttonElement.disabled = true;
       return;
@@ -202,7 +207,7 @@ import { renderComments } from "./renderComments.js";
     getDateNow();
   });
 
- */
+ 
 /* buttonElement.addEventListener("click", () => {
     buttonElement.disabled = true;
     loadingElement.classList.add("loadingInvisible")
