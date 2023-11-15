@@ -1,5 +1,5 @@
 const host = "https://wedev-api.sky.pro/api/v2/vorobyeva-tatyana/comments";
-const userURL = " https://wedev-api.sky.pro/api/user";
+const userURL = "https://wedev-api.sky.pro/api/user";
 export let token; 
 
 export const setToken = (newToken) => {
@@ -14,6 +14,12 @@ export function getTodos() {
       }
     })
       .then((response) => {
+        if(response.ststus === 401) {
+          password = promt("Введите верный пароль");
+          getTodos();
+
+          throw new Error("Нет авторизации")
+        }
        
         return response.json();
 
