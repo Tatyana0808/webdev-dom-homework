@@ -54,7 +54,7 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
   </ul>
   ${!token ? `<div class="authorization">
   Чтобы добавить комментарий,  <span id="link-to-link">авторизуйтесь</span> 
-  </div>` : ""};
+  </div>` : ""}
 
   ${token ? 
   ` <div class="add-form" id="addForm">
@@ -78,7 +78,7 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
   }
 
 
-  const authorizationButton = document.getElementById("link-to-link");
+  //const authorizationButton = document.getElementById("link-to-link");
   
 //  authorizationButton.addEventListener("click",  renderLogin )
 
