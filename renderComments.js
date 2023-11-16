@@ -92,20 +92,23 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
 
     likes();
     commentClick();
-    const buttonElement = document.getElementById("add-button");
-    const buttonElementDel = document.getElementById("delete-button");
-    
-    const nameInputElement = document.getElementById('name-input');
-    const textareaInputElement = document.getElementById('textarea-input');
-    const loaderElement = document.querySelector('.loader');
-    const loadingElement = document.querySelector('.loading');
-    const formElement = document.querySelector('.add-form');
-    const ulElement = document.getElementById("list-comments");
-
+   
     const getToken = () => token
+    getToken ();
 
     if(token){
+      
+  
       buttonElement.addEventListener("click", () => {
+        const buttonElement = document.getElementById("add-button");
+        const buttonElementDel = document.getElementById("delete-button");
+      
+        const nameInputElement = document.getElementById('name-input');
+        const textareaInputElement = document.getElementById('textarea-input');
+        const loaderElement = document.querySelector('.loader');
+        const loadingElement = document.querySelector('.loading');
+        const formElement = document.querySelector('.add-form');
+        const ulElement = document.getElementById("list-comments");
         buttonElement.disabled = true;
         loadingElement.classList.add("loadingInvisible")
         formElement.classList.add("add-formInvisible")
