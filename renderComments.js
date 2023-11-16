@@ -1,5 +1,6 @@
 import { postTodo, token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
+import { fetchComments } from "./main.js";
 const listElement = document.getElementById('list-comments')
 
 export const renderComments = ({commentsArray,likes,commentClick}) => {
