@@ -165,6 +165,7 @@ import { renderComments } from "./renderComments.js";
   renderComments({commentsArray,likes,commentClick});
 
   const getToken = () => token
+  getToken ();
   if(token){
 
     setActiveButtonInput();//Делаем кнопку активной после ввода поля
