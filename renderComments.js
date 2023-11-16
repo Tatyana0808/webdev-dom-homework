@@ -72,17 +72,17 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
   ` ;
 
 
-
+  if (!token) {
+    const authorizationButton = document.getElementById("link-to-link");
+    authorizationButton.addEventListener("click",  renderLogin )
+  }
 
 
   const authorizationButton = document.getElementById("link-to-link");
   
-  authorizationButton.addEventListener("click",  renderLogin )
+//  authorizationButton.addEventListener("click",  renderLogin )
 
-  if (your_element) { 
-    your_element.addEventListener("click",  renderLogin ) 
-  }
-
+ 
 
 
 
