@@ -97,10 +97,10 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
     getToken ();
 
     if(token){
-      
+      const buttonElement = document.getElementById("add-button");
   
       buttonElement.addEventListener("click", () => {
-        const buttonElement = document.getElementById("add-button");
+        
         const buttonElementDel = document.getElementById("delete-button");
       
         const nameInputElement = document.getElementById('name-input');
