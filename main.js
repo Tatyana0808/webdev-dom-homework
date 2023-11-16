@@ -75,6 +75,7 @@ import { renderComments } from "./renderComments.js";
 
 
 //цепочка промисов method: "GET"
+
  export const fetchComments = () => {
     getTodos().then((responseData) => {
         const getApiComments = responseData.comments.map((comment) => {
