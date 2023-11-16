@@ -105,14 +105,14 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
       
         const nameInputElement = document.getElementById('name-input');
         const textareaInputElement = document.getElementById('textarea-input');
-        const loaderElement = document.querySelector('.loader');
-        const loadingElement = document.querySelector('.loading');
+        //const loaderElement = document.querySelector('.loader');
+        //const loadingElement = document.querySelector('.loading');
         const formElement = document.querySelector('.add-form');
         const ulElement = document.getElementById("list-comments");
         buttonElement.disabled = true;
-        loadingElement.classList.add("loadingInvisible")
+        //loadingElement.classList.add("loadingInvisible")
         formElement.classList.add("add-formInvisible")
-        loaderElement.classList.add("hidden");
+       // loaderElement.classList.add("hidden");
     
         const postCommentsPromise = () => {
           
@@ -138,7 +138,7 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
               .finally(() => {
                 console.log("click");
     
-                loadingElement.classList.remove("loadingInvisible");
+                //loadingElement.classList.remove("loadingInvisible");
                 formElement.classList.remove("add-formInvisible");
                 buttonElement.disabled = false;
               })
