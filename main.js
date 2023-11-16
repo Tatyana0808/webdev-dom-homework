@@ -64,8 +64,8 @@ import { renderComments } from "./renderComments.js";
   const nameInputElement = document.getElementById('name-input');
   const textareaInputElement = document.getElementById('textarea-input');
   const loaderElement = document.querySelector('.loader');
-  const loadingElement = document.querySelector('.loading');
-  const formElement = document.querySelector('.add-form');
+  //const loadingElement = document.querySelector('.loading');
+ //const formElement = document.querySelector('.add-form');
 
  // setActiveButtonInput();//Делаем кнопку активной после ввода поля
 
