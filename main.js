@@ -1,7 +1,9 @@
 
   "use strict";
 
-import { getTodos, postTodo } from "./api.js";
+import { getTodos } from "./api.js";
+import { token } from "./api.js";
+import { renderLogin } from "./loginPage.js";
 import { renderComments } from "./renderComments.js";
 
   console.log("It works!");
@@ -56,24 +58,21 @@ import { renderComments } from "./renderComments.js";
       textareaInputElement.value = "";
     }
   }
-  const buttonElement = document.getElementById('add-button');
+  const buttonElement = document.getElementById("add-button");
   const buttonElementDel = document.getElementById("delete-button");
   
   const nameInputElement = document.getElementById('name-input');
   const textareaInputElement = document.getElementById('textarea-input');
   const loaderElement = document.querySelector('.loader');
-  const loadingElement = document.querySelector('.loading');
-  const formElement = document.querySelector('.add-form');
+  
 
-  setActiveButtonInput();//Делаем кнопку активной после ввода поля
-
-  setActiveButtonMessage();//Делаем кнопку активной после ввода поля
   let commentsArray = [];
 
 
 
 //цепочка промисов method: "GET"
-  const fetchComments = () => {
+
+ export const fetchComments = () => {
     getTodos().then((responseData) => {
         const getApiComments = responseData.comments.map((comment) => {
           return {
@@ -85,12 +84,13 @@ import { renderComments } from "./renderComments.js";
           };
         });
         commentsArray = getApiComments;
-        renderComments({commentsArray},{likes},{commentClick});
+        renderComments({commentsArray,likes,commentClick});
         loaderElement.classList.add("hidden");
       });
   };
 
   fetchComments();
+  
 
   const getDateNow = () => {
     const dateNow = new Date();
@@ -117,10 +117,6 @@ import { renderComments } from "./renderComments.js";
 
   document.addEventListener("keyup", submitEnter);
 
-  buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
-    document.getElementById('list-comments').lastElementChild.remove();
-  });
-
 
 
   const likes = () => {
@@ -138,7 +134,7 @@ import { renderComments } from "./renderComments.js";
           commentsArray[index].like -= 1;
           commentsArray[index].userLike = false;
         }
-        renderComments({commentsArray},{likes},{commentClick});
+        renderComments({commentsArray,likes,commentClick});
       });
     };
   };
@@ -159,12 +155,28 @@ import { renderComments } from "./renderComments.js";
 
  
 
-  renderComments({commentsArray},{likes},{commentClick});
+  renderComments({commentsArray,likes,commentClick});
 
+  const getToken = () => token
+  getToken ();
+  if(token){
 
+    setActiveButtonInput();//Делаем кнопку активной после ввода поля
 
-  buttonElement.disabled = true;
-  nameInputElement.addEventListener('input', () => {
+    setActiveButtonMessage();//Делаем кнопку активной после ввода поля
+
+  }
+
+  if (token){
+    buttonElementDel.addEventListener(('click'), () => { //Удаляю последний элемент (комментарий);
+       document.getElementById('list-comments').lastElementChild.remove();
+      });
+     } 
+
+   if (token){
+
+    buttonElement.disabled = true;
+   nameInputElement.addEventListener('input', () => {
     if ((nameInputElement.value === '') || (textareaInputElement.value === '')) {
       buttonElement.disabled = true;
       return;
@@ -198,54 +210,14 @@ import { renderComments } from "./renderComments.js";
       return;
     }
     getDateNow();
-  });
+  }); 
+
+   }   
 
 
 
 
-  buttonElement.addEventListener("click", () => {
-    buttonElement.disabled = true;
-    loadingElement.classList.add("loadingInvisible")
-    formElement.classList.add("add-formInvisible")
-    loaderElement.classList.add("hidden");
-
-    const postCommentsPromise = () => {
-      
-        postTodo({name:nameInputElement.value}, {text: textareaInputElement.value}).then((responseData) => {
-            nameInputElement.value = '';
-            textareaInputElement.value = '';
-           return fetchComments()
-           
-
-          })
-
-
-          
-          .catch((error) => {
-            if  (error.message === 'Failed to fetch') {
-               alert("Проблемы с интернетом, проверьте подключение")
-
-            }
-
-             alert(error.message);
-
-          })
-          .finally(() => {
-            console.log("click");
-
-            loadingElement.classList.remove("loadingInvisible");
-            formElement.classList.remove("add-formInvisible");
-            buttonElement.disabled = false;
-          })
-     
-
-    };
-
-
-    postCommentsPromise();
-
-    
-  });
+ 
 
 
 
