@@ -29,7 +29,7 @@ login({
 }).then((responseData) => {
 console.log(token);
 setToken(responseData.user.token);
-//console.log(responseData.user.name);
+
 console.log(token);
 console.log(nameUser);
 setName(responseData.user.name);

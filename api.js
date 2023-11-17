@@ -20,9 +20,7 @@ export function getTodos() {
       .then((response) => {
         if(response.ststus === 401) {
 
-         // alert ("Вы ввели не верный логин или пароль")
-          //password = promt("Введите верный пароль");
-          //getTodos();
+        
 
           throw new Error("Нет авторизации")
         }
