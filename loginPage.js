@@ -33,6 +33,7 @@ console.log(token);
     }).then(() => {
        fetchComments(); 
     })
+    
 });
 
 };

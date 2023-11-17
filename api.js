@@ -15,6 +15,8 @@ export function getTodos() {
     })
       .then((response) => {
         if(response.ststus === 401) {
+
+         // alert ("Вы ввели не верный логин или пароль")
           //password = promt("Введите верный пароль");
           //getTodos();
 
@@ -66,9 +68,17 @@ export function postTodo( {name}, {text} ) {
       
              }),
            })
-           .then((response) => {
+           .then((response, event) => {
+            if(response.status === 400) {
+              alert ("Вы ввели не верный логин или пароль");
+              event.stopPropagation();
+            }else{
+              return response.json();
+
+            }
+
              
-                 return response.json();
+                 
                  
            })
 
