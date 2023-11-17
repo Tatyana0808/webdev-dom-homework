@@ -1,4 +1,4 @@
-import { login, setToken, token } from "./api.js"
+import { login, setToken, token, nameUser, setName } from "./api.js"
 import {fetchComments} from "./main.js"
 
 
@@ -29,7 +29,11 @@ login({
 }).then((responseData) => {
 console.log(token);
 setToken(responseData.user.token);
+//console.log(responseData.user.name);
 console.log(token);
+console.log(nameUser);
+setName(responseData.user.name);
+console.log(nameUser);
     }).then(() => {
        fetchComments(); 
     })

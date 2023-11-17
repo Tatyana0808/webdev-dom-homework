@@ -1,6 +1,10 @@
 const host = "https://wedev-api.sky.pro/api/v2/vorobyeva-tatyana/comments";
 const userURL = "https://wedev-api.sky.pro/api/user/login";
 export let token; 
+export let nameUser;
+export const setName = (newName) => {
+  nameUser = newName;
+}
 
 export const setToken = (newToken) => {
 token = newToken;

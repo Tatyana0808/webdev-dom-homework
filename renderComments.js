@@ -1,4 +1,4 @@
-import { postTodo, token } from "./api.js";
+import { postTodo, token, nameUser } from "./api.js";
 import { renderLogin } from "./loginPage.js";
 import { fetchComments } from "./main.js";
 const listElement = document.getElementById('list-comments')
@@ -59,7 +59,8 @@ export const renderComments = ({commentsArray,likes,commentClick}) => {
 
   ${token ? 
   ` <div class="add-form" id="addForm">
-  <input id="name-input" type="text" class="add-form-name" placeholder="Введите ваше имя" />
+  <input id="name-input" type="text" class="add-form-name" value=${nameUser} readonly
+  placeholder="Введите ваше имя" />
   <textarea id="textarea-input" type="textarea" class="add-form-text" placeholder="Введите ваш коментарий"
     rows="4"></textarea>
   <div class="add-form-row">
