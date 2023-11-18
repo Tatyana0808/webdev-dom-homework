@@ -6,6 +6,31 @@ import { token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
 import { renderComments } from "./renderComments.js";
 
+
+import { addTodo, deleteTodo, getTodos } from "./api.js";
+import { renderLoginComponent } from "./components/login-component.js";
+import { formatDateToRu, formatDateToUs } from "./lib/formatDate/formatDate.js"
+
+
+const tasksHtml = tasks;
+const country = "ru"
+
+    .map((task) => {
+      return `
+          < class="task">
+            <p class="task-text">
+              ${task.text} (Создал: ${task.user?.name ?? "Неизвестно"})
+              <button data-id="${
+                task.id
+              }" class="button delete-button">Удалить</button>
+            </p>
+            <p><i>Задача создана: ${country === "ru" ? formatDateToRu(new Date(task.created_at)) : formatDateToUs(new Date(task.created_at))}</i></p>
+          
+          </li>`;
+    })
+    .join("");
+
+
   console.log("It works!");
 
   // Код писать здесь
