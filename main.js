@@ -8,24 +8,31 @@ import { renderComments } from "./renderComments.js";
 
 
 import { addTodo, deleteTodo, getTodos } from "./api.js";
-//import { renderLoginComponent } from "./components/login-component.js";
+import { renderLoginComponent } from "./components/login-component.js";
 import { formatDateToRu, formatDateToUs } from "./lib/formatDate/formatDate.js"
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 
 
-const tasksHtml = tasks;
+
 const country = "ru"
+const now = new Date();
+
+format(now, "dd/MM/yyyy hh:mm"); // 26/03/2023 10:33
+format(now, "MM-dd-yyyy hh:mm"); // 03-26-2023 10:33
+format(now, "dd.MM.yyyy hh:mm:ss"); // 26.03.2023 10:33:41
+const tasksHtml = tasks
 
     .map((task) => {
+      const createDate = format(new Date(task.created_at), 'dd/MM/yyyy hh:mm');
       return `
-          < class="task">
+          <li class="task">
             <p class="task-text">
               ${task.text} (Создал: ${task.user?.name ?? "Неизвестно"})
               <button data-id="${
                 task.id
               }" class="button delete-button">Удалить</button>
             </p>
-            <p><i>Задача создана: ${country === "ru" ? formatDateToRu(new Date(task.created_at)) : formatDateToUs(new Date(task.created_at))}</i></p>
+            <p><i>Задача создана: ${createDate}</i></p>
           
           </li>`;
     })
