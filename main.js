@@ -10,6 +10,7 @@ import { renderComments } from "./renderComments.js";
 import { addTodo, deleteTodo, getTodos } from "./api.js";
 import { renderLoginComponent } from "./components/login-component.js";
 import { formatDateToRu, formatDateToUs } from "./lib/formatDate/formatDate.js"
+import { format } from 'date-fns'
 
 
 const tasksHtml = tasks;
@@ -102,7 +103,7 @@ const country = "ru"
         const getApiComments = responseData.comments.map((comment) => {
           return {
             name: comment.author.name,
-            date: getDateNow(),
+            date: format(new Date(comment.date), "yyyy-MM-dd hh.mm.ss"),
             like: comment.likes,
             userLike: false,
             comment: comment.text,
