@@ -13,7 +13,7 @@ import { format } from 'date-fns';
 
 
 
-const country = "ru"
+/*const country = "ru"
 const now = new Date();
 
 format(now, "dd/MM/yyyy hh:mm"); // 26/03/2023 10:33
@@ -35,7 +35,7 @@ const tasksHtml = tasks
           
           </li>`;
     })
-    .join("");
+    .join("");*/
 
 
   console.log("It works!");
