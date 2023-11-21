@@ -1,10 +1,42 @@
 
   "use strict";
 
-import { getTodos } from "./api.js";
+
 import { token } from "./api.js";
 import { renderLogin } from "./loginPage.js";
 import { renderComments } from "./renderComments.js";
+
+
+import { addTodo, deleteTodo, getTodos } from "./api.js";;
+import { formatDateToRu, formatDateToUs } from "./lib/formatDate/formatDate.js"
+import { format } from 'date-fns';
+
+
+
+/*const country = "ru"
+const now = new Date();
+
+format(now, "dd/MM/yyyy hh:mm"); // 26/03/2023 10:33
+format(now, "MM-dd-yyyy hh:mm"); // 03-26-2023 10:33
+format(now, "dd.MM.yyyy hh:mm:ss"); // 26.03.2023 10:33:41
+const tasksHtml = tasks
+
+    .map((task) => {
+      const createDate = format(new Date(task.created_at), 'dd/MM/yyyy hh:mm');
+      return `
+          <li class="task">
+            <p class="task-text">
+              ${task.text} (Создал: ${task.user?.name ?? "Неизвестно"})
+              <button data-id="${
+                task.id
+              }" class="button delete-button">Удалить</button>
+            </p>
+            <p><i>Задача создана: ${createDate}</i></p>
+          
+          </li>`;
+    })
+    .join("");*/
+
 
   console.log("It works!");
 
@@ -77,7 +109,7 @@ import { renderComments } from "./renderComments.js";
         const getApiComments = responseData.comments.map((comment) => {
           return {
             name: comment.author.name,
-            date: getDateNow(),
+            date: format(new Date(comment.date), "yyyy-MM-dd hh.mm.ss"),
             like: comment.likes,
             userLike: false,
             comment: comment.text,
